@@ -1,6 +1,6 @@
 ﻿  tset.cpp
   tbitfield.cpp
   Generating Code...
-c:\projects\mp2-lab1-set\src\tbitfield.cpp(57): warning C4172: returning address of local variable or temporary: a
+c:\projects\mp2-lab1-set\src\tbitfield.cpp(64): warning C4172: returning address of local variable or temporary: a
 c:\projects\mp2-lab1-set\src\tset.cpp(52): warning C4172: returning address of local variable or temporary: a
   bitfield.vcxproj -> C:\Projects\mp2-lab1-set\sln\vc10\Debug\bitfield.lib
