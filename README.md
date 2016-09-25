@@ -1,4 +1,4 @@
-# Методы программирования 2: Множества на основе битовых полей
+﻿# Методы программирования 2: Множества на основе битовых полей
 
 [![Build Status](https://travis-ci.org/UNN-VMK-Software/mp2-lab1-set.svg)][travis]
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)][gitter]
@@ -15,6 +15,7 @@
     - Опубликованы [видеозаписи][youtube-playlist] с живой демонстрацией Git и
       Google Test.
     - Опубликованы [слайды][slides] с лекций про Git и Google Test.
+  - 2016-09-25 Александр разбирается с Гитом)
 
 ## Цели и задачи
 
