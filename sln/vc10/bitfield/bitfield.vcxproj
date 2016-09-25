@@ -85,6 +85,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\include\tbitfield.h" />
     <ClInclude Include="..\..\..\include\tset.h" />
+    <ClInclude Include="Defines.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
