@@ -4,13 +4,37 @@
 //   Переработано для Microsoft Visual Studio 2008 Сысоевым А.В. (19.04.2015)
 //
 // Битовое поле
+#define LENGTHBYTE 8
+#define ERROR 0
+inline int LengthInt()
+{
+	return sizeof(int)*LENGTHBYTE;
+}
 
 #include "tbitfield.h"
+	TBitField::TBitField(int len)
+	{
+		try
+		{
+		if (len > 0 && len < UINT_MAX)
+		{
+			BitLen = len;
+			MemLen = (len - 1) / sizeof(int) + 1;
+			pMem = new TELEM[MemLen];
+			for (int i = 0; i < MemLen; i++)
+				pMem[i] = 0;
+		}
+		else
+			throw ERROR;
+	}
+		catch (int error)
+		{
+			cout << "you print " << len;
+			throw ERROR;
+		}
 
-TBitField::TBitField(int len)
-{
-	pMem = new TELEM [(len-1)/sizeof(int) + 1];
-}
+	}
+
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
 {
