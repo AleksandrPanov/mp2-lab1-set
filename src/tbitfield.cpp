@@ -49,9 +49,9 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 
 TBitField::~TBitField()
 {
-	/*BitLen = 0;
+	BitLen = 0;
 	MemLen = 0;
-	delete[] pMem;*/
+	delete[] pMem;
 }
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
@@ -114,26 +114,28 @@ TBitField *TBitField::operator=(const TBitField &bf) // присваивание
 
 int TBitField::operator==(const TBitField &bf) const // сравнение
 {
-	if (BitLen == bf.BitLen)
+	if (MemLen == bf.MemLen || BitLen == bf.BitLen)
 	{
-		for (int i = 0; i < MemLen; i++)
+		for (int i = 0; i < BitLen/LengthInt(); i++)
+		{
 			if (pMem[i] != bf.pMem[i])
 				return false;
+		}
 	return true;
 	}
-	else throw ERROR;
+	return false;
 }
 
 int TBitField::operator!=(const TBitField &bf) const // сравнение
 {
-	if (BitLen == bf.BitLen)
+	if (MemLen == bf.MemLen || BitLen == bf.BitLen)
 	{
 		for (int i = 0; i < MemLen; i++)
 			if (pMem[i] != bf.pMem[i])
 				return true;
 		return false;
 	}
-	else throw ERROR;
+	return false;
 }
 
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"
@@ -161,15 +163,15 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
 	if (bf.MemLen >= MemLen)
 	{
-		TBitField tmp(bf);
+		TBitField tmp(bf.BitLen);
 		for (int i = 0; i < MemLen; i++)
-			tmp.pMem[i] = tmp.pMem[i] & pMem[i];
+			tmp.pMem[i] = pMem[i] & bf.pMem[i];
 		return tmp;
 	}
 	else
 	{
-		TBitField tmp(MemLen);
-		for (int i = 0; i < bf.MemLen; i++)
+		TBitField tmp(BitLen);
+		for (int i = 0; i < MemLen; i++)
 			tmp.pMem[i] = pMem[i] & bf.pMem[i];
 		return tmp;
 	}
@@ -177,10 +179,10 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 
 TBitField TBitField::operator~(void) // отрицание
 {
-	TBitField tmp(MemLen);
+	TBitField tmp(BitLen);
 	for (int i = 0; i < MemLen; i++)
 		tmp.pMem[i] = ~pMem[i];
-	tmp.pMem[MemLen/LengthInt()] = tmp.pMem[MemLen / LengthInt()] & (UINT_MAX << BitLen%LengthInt() );
+	tmp.pMem[BitLen /LengthInt()] = tmp.pMem[BitLen / LengthInt()] & (UINT_MAX >> (LengthInt()-BitLen%LengthInt()) );
 	return tmp;
 }
 
