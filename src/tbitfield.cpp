@@ -190,10 +190,30 @@ TBitField TBitField::operator~(void) // отрицание
 
 istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
+	int count = 0;
+	int bit;
+	cin >> bit;
+	while (count < bf.BitLen && bit >= 0)
+	{
+		if (bf.GetBit(bit) == 0)
+		{
+			bf.SetBit(bit);
+			count++;
+		}
+	}
+
 	return istr;
 }
 
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
+	for (int i = 0; i < bf.MemLen; i++)
+		if (bf.pMem[i] != 0)
+		{
+			for (int j = 0; j < LengthInt(); j++)
+				if (bf.pMem[i] & (1 << j))
+					cout << j + i*LengthInt() << " ";
+		}
 	return ostr;
 }
+

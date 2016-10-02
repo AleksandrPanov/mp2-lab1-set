@@ -1,1 +1,3 @@
-﻿  gtest.vcxproj -> C:\Projects\mp2-lab1-set\sln\vc10\Debug\gtest.lib
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppClean.targets(76,5): warning : Процесс не может получить доступ к файлу "c:\project\mp2-lab1-set\sln\vc10\debug\gtest.pdb", так как этот файл используется другим процессом.
+  gtest-all.cc
+  gtest.vcxproj -> C:\Project\mp2-lab1-set\sln\vc10\Debug\gtest.lib
