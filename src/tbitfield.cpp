@@ -49,8 +49,6 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 
 TBitField::~TBitField()
 {
-	BitLen = 0;
-	MemLen = 0;
 	delete[] pMem;
 }
 
@@ -107,33 +105,57 @@ TBitField *TBitField::operator=(const TBitField &bf) // присваивание
 		BitLen = bf.BitLen;
 		for (int i = 0; i < MemLen; i++)
 			pMem[i] = bf.pMem[i];
-		return this;
 	}
-	else throw ERROR;
+	else
+	{
+		delete[] pMem;
+		pMem = new TELEM[bf.BitLen];
+		MemLen = bf.MemLen;
+		BitLen = bf.BitLen;
+			for (int i = 0; i < MemLen; i++)
+				pMem[i] = bf.pMem[i];
+	}
+	return this;
 }
 
 int TBitField::operator==(const TBitField &bf) const // сравнение
 {
-	if (MemLen == bf.MemLen || BitLen == bf.BitLen)
+	int min = Min(MemLen, bf.MemLen);
+	int max = Max1(MemLen, bf.MemLen);
+	for (int i = 0; i < min; i++)
+		if (pMem[i] != bf.pMem[i])
+			return false;
+	if (min != max) 
 	{
-		for (int i = 0; i < BitLen/LengthInt(); i++)
-		{
-			if (pMem[i] != bf.pMem[i])
+		TELEM *maxField;
+		if (MemLen > bf.MemLen)
+			maxField = pMem;
+		else maxField = bf.pMem;
+
+		for (int i = min + 1; i < max; i++)
+			if (maxField[i] != 0)
 				return false;
-		}
-	return true;
 	}
-	return false;
+	return true;
 }
 
 int TBitField::operator!=(const TBitField &bf) const // сравнение
 {
-	if (MemLen == bf.MemLen || BitLen == bf.BitLen)
-	{
-		for (int i = 0; i < MemLen; i++)
-			if (pMem[i] != bf.pMem[i])
+	int min = Min(MemLen, bf.MemLen);
+	int max = Max1(MemLen, bf.MemLen);
+	for (int i = 0; i < min; i++)
+		if (pMem[i] != bf.pMem[i])
+			return true;
+
+	if (min != max) {
+		TELEM *maxField;
+		if (MemLen > bf.MemLen)
+			maxField = pMem;
+		else maxField = bf.pMem;
+
+		for (int i = min + 1; i < max; i++)
+			if (maxField[i] != 0)
 				return true;
-		return false;
 	}
 	return false;
 }
@@ -183,6 +205,8 @@ TBitField TBitField::operator~(void) // отрицание
 	for (int i = 0; i < MemLen; i++)
 		tmp.pMem[i] = ~pMem[i];
 	tmp.pMem[BitLen /LengthInt()] = tmp.pMem[BitLen / LengthInt()] & (UINT_MAX >> (LengthInt()-BitLen%LengthInt()) );
+	for (int i = BitLen / LengthInt() + 1; i < MemLen; i++)
+		tmp.pMem[i] = 0;
 	return tmp;
 }
 

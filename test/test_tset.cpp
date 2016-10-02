@@ -107,6 +107,8 @@ TEST(TSet, can_assign_set_of_greater_size)
   set1.InsElem(3);
   set2 = set1;
 
+  cout << endl << set1 << endl << set2;
+
   EXPECT_EQ(set1, set2);
 }
 

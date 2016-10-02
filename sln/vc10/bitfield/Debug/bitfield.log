@@ -1,3 +1,4 @@
-﻿  tbitfield.cpp
-c:\project\mp2-lab1-set\src\tbitfield.cpp(32): warning C4101: error: неиспользованная локальная переменная
+﻿  tset.cpp
+c:\project\mp2-lab1-set\include\tbitfield.h(10): warning C4005: Min: изменение макроопределения
+  c:\project\mp2-lab1-set\include\tset.h(10): note: см. предыдущее определение "Min"
   bitfield.vcxproj -> C:\Project\mp2-lab1-set\sln\vc10\Debug\bitfield.lib

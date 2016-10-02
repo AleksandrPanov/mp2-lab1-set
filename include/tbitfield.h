@@ -7,6 +7,9 @@
 
 #ifndef __BITFIELD_H__
 #define __BITFIELD_H__
+#define Min(a, b) (a < b ? a:b)
+#define Max1(a, b) (a > b ? a:b)
+#define ERROR 0
 
 #include <iostream>
 

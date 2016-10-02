@@ -7,6 +7,7 @@
 
 #ifndef __SET_H__
 #define __SET_H__
+#define Min(a, b) (a < b a:b)
 
 #include "tbitfield.h"
 
