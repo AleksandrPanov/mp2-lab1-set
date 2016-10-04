@@ -111,11 +111,25 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
+	cout << "Max number of set = " <<s.MaxPower - 1<<"Print number or -1 for end" <<endl;
+	int count = 0;
+	int num;
+	cin >> num;
+	while (count < s.MaxPower && num >= 0 && num < s.MaxPower)
+	{
+		if (s.IsMember(num) == 0)
+		{
+			s.InsElem(num);
+			count++;
+		}
+		cin >> num;
+	}
 	return istr;
 }
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
+	cout << "Power of set = " << s.MaxPower<<endl;
 	cout << s.BitField;
 	return ostr;
 }

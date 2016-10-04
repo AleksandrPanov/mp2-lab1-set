@@ -92,28 +92,31 @@ int TBitField::GetBit(const int n) const // получить значение б
 
 	if (n >= 0 && n < BitLen)
 		return (pMem[n / LengthInt()] & (1 << n % LengthInt()));
-	else throw ERROR;
+	else throw "Bad bit";
 }
 
 // битовые операции
 
 TBitField *TBitField::operator=(const TBitField &bf) // присваивание
 {
-	if (BitLen >= bf.BitLen) 
+	if (*this != bf)
 	{
-		MemLen = bf.MemLen;
-		BitLen = bf.BitLen;
-		for (int i = 0; i < MemLen; i++)
-			pMem[i] = bf.pMem[i];
-	}
-	else
-	{
-		delete[] pMem;
-		pMem = new TELEM[bf.BitLen];
-		MemLen = bf.MemLen;
-		BitLen = bf.BitLen;
+		if (BitLen >= bf.BitLen)
+		{
+			MemLen = bf.MemLen;
+			BitLen = bf.BitLen;
 			for (int i = 0; i < MemLen; i++)
 				pMem[i] = bf.pMem[i];
+		}
+		else
+		{
+			delete[] pMem;
+			pMem = new TELEM[bf.BitLen];
+			MemLen = bf.MemLen;
+			BitLen = bf.BitLen;
+			for (int i = 0; i < MemLen; i++)
+				pMem[i] = bf.pMem[i];
+		}
 	}
 	return this;
 }
@@ -214,10 +217,11 @@ TBitField TBitField::operator~(void) // отрицание
 
 istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
+	cout << "max nomber in bitfield ="<<bf.BitLen - 1<<endl;
 	int count = 0;
 	int bit;
 	cin >> bit;
-	while (count < bf.BitLen && bit >= 0)
+	while (count < bf.BitLen)
 	{
 		if (bf.GetBit(bit) == 0)
 		{
@@ -238,6 +242,7 @@ ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 				if (bf.pMem[i] & (1 << j))
 					cout << j + i*LengthInt() << " ";
 		}
+	cout << endl;
 	return ostr;
 }
 

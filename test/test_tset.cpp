@@ -107,7 +107,7 @@ TEST(TSet, can_assign_set_of_greater_size)
   set1.InsElem(3);
   set2 = set1;
 
-  cout << endl << set1 << endl << set2;
+ // cout << endl << set1 << endl << set2;
 
   EXPECT_EQ(set1, set2);
 }
@@ -296,4 +296,19 @@ TEST(TSet, check_negation_operator)
   expSet.InsElem(2);
 
   EXPECT_EQ(expSet, set1);
+}
+
+TEST(TSet, testCoutInsClearPlusMinus)
+{
+	const int size = 13;
+	TSet set(size), set1(size), expSet(size);
+	// set1 = {1, 3}
+	set.InsElem(1);
+	set.DelElem(1);
+	set.DelElem(1);
+	set1 = set1 + 1 + 3 + 5 + 12;
+	cout << set1;
+	set1 = set1 - 1 - 3 - 5 - 12;
+	set1 = set1 - 1;
+	EXPECT_EQ(expSet, set1 + set + set1);
 }
