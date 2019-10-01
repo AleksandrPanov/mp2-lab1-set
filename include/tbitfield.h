@@ -7,6 +7,9 @@
 
 #ifndef __BITFIELD_H__
 #define __BITFIELD_H__
+#define Min(a, b) (a < b ? a:b)
+#define Max1(a, b) (a > b ? a:b)
+#define ERROR 0
 
 #include <iostream>
 
@@ -38,7 +41,7 @@ public:
   // битовые операции
   int operator==(const TBitField &bf) const; // сравнение                 (#О5)
   int operator!=(const TBitField &bf) const; // сравнение
-  TBitField& operator=(const TBitField &bf); // присваивание              (#П3)
+  TBitField* operator=(const TBitField &bf); // присваивание              (#П3)
   TBitField  operator|(const TBitField &bf); // операция "или"            (#О6)
   TBitField  operator&(const TBitField &bf); // операция "и"              (#Л2)
   TBitField  operator~(void);                // отрицание                  (#С)
